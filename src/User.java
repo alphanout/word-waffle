@@ -1,4 +1,4 @@
-package src.PW;
+package src;
 import java.util.*;
 public class User {
     int uid;
