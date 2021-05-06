@@ -1,8 +1,12 @@
-package src;
+package src.PW;
 import java.util.*;
 public class User {
     int uid;
     String uname;
+    User(int uid, Scanner sc)
+    {
+        gameSelection(uid,sc);
+    }
     User(int uid, String uname, Scanner sc)
     {
         this.uid=uid;
@@ -44,7 +48,6 @@ public class User {
     }
     private void getHistory()
     {
-
+        
     }   
 }
-
