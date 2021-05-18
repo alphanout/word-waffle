@@ -1,4 +1,4 @@
-package src.PW;
+package PW;
 import java.util.*;
 public class User {
     int uid;
@@ -27,16 +27,13 @@ public class User {
             switch(choice)
             {
                 case 1:
-                System.out.println("First Game running");
-                //constructor calling for first game
+                new JumbledWord();
                 break;
                 case 2:
-                System.out.println("Second Game running");
-                //constructor calling for 2nd game
+                new RiddleG();
                 break;
                 case 3:
-                System.out.println("Third Game running");
-                Hangman h = new Hangman(sc);
+                new Hangman(sc);
                 break;
                 case 0:
                 System.exit(0);
@@ -51,3 +48,4 @@ public class User {
         
     }   
 }
+

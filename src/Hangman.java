@@ -1,6 +1,5 @@
-package src;
-import java.util.Scanner;
-
+package PW;
+import java.util.*;
 public class Hangman {
 
     private static String[] words = { "terminator", "banana", "computer", "cow", "rain", "water" };
@@ -127,3 +126,4 @@ public class Hangman {
         }
     }
 }
+
