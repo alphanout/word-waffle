@@ -81,6 +81,7 @@ public class RiddleG {
 	    		
 	    		else {
 	    			System.out.println("OOPS! Your answer is wrong");
+					System.out.println("The Correct Answer was "+crtans);
 	    			System.out.println("Your current score: "+score);
 	    			chance+=1;
 	    			if(chance==3)
@@ -94,6 +95,8 @@ public class RiddleG {
 	    	}
 	    System.out.println("GAME OVER");
 		System.out.println("Your total score is "+score);
+		sc.close();
 		return score;
+		
  }
 }
