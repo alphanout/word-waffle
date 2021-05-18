@@ -5,7 +5,7 @@ public class RiddleG {
  {
 	play();
  }
- public int play() {
+ public void play() {
 	 Scanner sc = new Scanner(System.in);
 	 LinkedHashMap<String, String> myMap = new LinkedHashMap<String, String>() {{
 	        put("What has to be broken before you can use it?","egg");
@@ -99,7 +99,7 @@ public class RiddleG {
 	    System.out.println("GAME OVER");
 		System.out.println("Your total score is "+score);
 		sc.close();
-		return score;
+		//return score;
 		
  }
 }
