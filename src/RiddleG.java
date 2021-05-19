@@ -98,7 +98,7 @@ public class RiddleG {
 	    	}
 	    System.out.println("GAME OVER");
 		System.out.println("Your total score is "+score);
-		sc.close();
+		//sc.close();
 		//return score;
 		
  }

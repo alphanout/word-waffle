@@ -9,10 +9,15 @@ public class Hangman {
 
     Hangman(Scanner sc) {
         while (count < 7 && asterisk.contains("*")) {
+            System.out.println("TO QUIT ENTER \"QUIT\" IN ANSWER");
             System.out.println("Guess any letter in the word");
             System.out.println(asterisk);
             String guess = sc.next();
-            if (guess.length() != 1)
+            if(guess.equalsIgnoreCase("quit"))
+            {
+                break;
+            }
+            else if (guess.length() != 1)
                 System.out.println("Guess only a alphabet.");
             else
                 hang(guess);

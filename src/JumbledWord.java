@@ -21,6 +21,7 @@ public class JumbledWord {
         words.put("WLEL","WELL");
         words.put("SHIINF","FINISH");
     
+        System.out.println("TO QUIT ENTER \"QUIT\" IN ANSWER");
          Scanner sc=new Scanner(System.in);
             int i=0;
             for(String w:words.keySet())
@@ -32,6 +33,10 @@ public class JumbledWord {
                 System.out.println(w);
                 System.out.println("Enter the correct String: ");
                 String ans=sc.nextLine();
+                if(ans.equalsIgnoreCase("quit"))
+                {
+                    break;
+                }
                 if(ans.equalsIgnoreCase(words.get(w)))
                 {
                      System.out.println("Welldone!!");
@@ -46,7 +51,7 @@ public class JumbledWord {
             }
             System.out.println("Your total Score is : "+totalScore);
         
-        sc.close();
+        //sc.close();
         }    
 
     }

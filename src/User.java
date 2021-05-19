@@ -43,9 +43,9 @@ public class User {
             }
         }
     }
-    private void getHistory()
+    /*private void getHistory()
     {
         
-    }   
+    } */  
 }
 
