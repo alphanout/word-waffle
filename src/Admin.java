@@ -1,9 +1,13 @@
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 public class Admin 
 {
+	public static final String A_RED = "\u001B[31m";
+    public static final String A_GREEN = "\u001B[32m";
+    public static final String A_RESET = "\u001B[0m";
 	Admin()
 	{
 	  operations();
@@ -48,9 +52,9 @@ public class Admin
             	RemoveUser();
             	break;
              	case 0:
-            	User u=new User(0,sc);
+            	new User(0,sc);
              	default:
-             	System.out.println("Wrong Input!! Please enter again");
+             	System.out.println(A_RED+"Wrong Input!! Please enter again"+A_RESET);
              	break;
         	}
      	}
@@ -62,6 +66,17 @@ public class Admin
 			Scanner s=new Scanner(System.in);
 	    	Connection con=Conn.getInstance();
 	    	Statement stmt=con.createStatement(); 
+			ResultSet rs = stmt.executeQuery("select * from jumbleddata");
+			System.out.println("----- Table contains Following Data -----");
+			while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+			System.out.println("-------------------------------------------");	
 	    	System.out.println("Enter id");
 	    	int id=s.nextInt();
 	    	s.nextLine();
@@ -73,11 +88,11 @@ public class Admin
 	    	int res=stmt.executeUpdate(sqlQ);
 	    	if(res==1) 
 			{
-	    		System.out.println("Added Question and Answer Successfully");
+	    		System.out.println(A_GREEN+"Added Question and Answer Successfully"+A_RESET);
 	    	}
 	    	else 
 			{
-		   		System.out.println("Opps! Couldn't add Question and Answer");
+		   		System.out.println(A_RED+"Opps! Couldn't add Question and Answer"+A_RESET);
 	    	}
 		}
 	 	catch(Exception e) 
@@ -85,13 +100,25 @@ public class Admin
 		 System.out.println(e);
 	 	}
  	}
- 	private static void AddRiddler() {
+ 	private static void AddRiddler() 
+	 {
 		try
 		{  
 		   Scanner s=new Scanner(System.in);
 	       Connection con=Conn.getInstance();
 	       Statement stmt=con.createStatement(); 
-	       System.out.println("Enter id");
+		   ResultSet rs = stmt.executeQuery("select * from riddlerddata");
+		   System.out.println("----- Table contains Following Data -----");
+		   while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+				System.out.println("-------------------------------------------");	
+		   System.out.println("Enter id");
 	       int id=s.nextInt();
 	       s.nextLine();
 	       System.out.println("Enter Question");
@@ -102,11 +129,11 @@ public class Admin
 	       int res=stmt.executeUpdate(sqlQ);
 	       if(res==1) 
 		   {
-	    	   System.out.println("Added Question and Answer Successfully");
+	    	   System.out.println(A_GREEN+"Added Question and Answer Successfully"+A_RESET);
 	       }
 	       else 
 		   {
-	    	   System.out.println("Opps! Couldn't add Question and Answer");
+	    	   System.out.println(A_RED+"Opps! Couldn't add Question and Answer"+A_RESET);
 	       }
 		}
 	 	catch(Exception e) 
@@ -120,7 +147,18 @@ public class Admin
 		{  
 		   Scanner s=new Scanner(System.in);
 	       Connection con=Conn.getInstance();
-	       Statement stmt=con.createStatement(); 
+	       Statement stmt=con.createStatement();
+		   ResultSet rs = stmt.executeQuery("select * from hangmandata");
+		   System.out.println("----- Table contains Following Data -----");	
+		   while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            } 
+				System.out.println("-------------------------------------------");
 	       System.out.println("Enter id");
 	       int id=s.nextInt();
 	       s.nextLine();
@@ -130,11 +168,11 @@ public class Admin
 	       int res=stmt.executeUpdate(sqlQ);
 	       if(res==1) 
 		   {
-	    	   System.out.println("Added Question and Answer Successfully");
+	    	   System.out.println(A_GREEN+"Added Question and Answer Successfully"+A_RESET);
 	       }
 	       else 
 		   {
-	    	   System.out.println("Opps! Couldn't add Question and Answer");
+	    	   System.out.println(A_RED+"Opps! Couldn't add Question and Answer"+A_RESET);
 	       }
 	 	}
 	 	catch(Exception e) 
@@ -148,18 +186,29 @@ public class Admin
 		{  
 		   	Scanner s=new Scanner(System.in);
 	       	Connection con=Conn.getInstance();
-	       	Statement stmt=con.createStatement(); 
+	       	Statement stmt=con.createStatement();
+			ResultSet rs = stmt.executeQuery("select * from jumbleddata");
+			System.out.println("----- Table contains Following Data -----");
+			while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+				System.out.println("-------------------------------------------");
 	       	System.out.println("Enter id");
 	       	int id=s.nextInt();
 	       	String sqlQ="delete from jumbleddata where jid="+id+";";
 	       	int res=stmt.executeUpdate(sqlQ);
 	       	if(res==1) 
 		   	{
-	    	   System.out.println("Deleted Question and Answer Successfully");
+	    	   System.out.println(A_GREEN+"Deleted Question and Answer Successfully"+A_RESET);
 	       	}
 	       	else
 			{
-	    	   System.out.println("Opps! Couldn't delete Question and Answer");
+	    	   System.out.println(A_RED+"Opps! Couldn't delete Question and Answer"+A_RESET);
 	       	}
 	 	}
 	 	catch(Exception e) 
@@ -174,17 +223,28 @@ public class Admin
 		   Scanner s=new Scanner(System.in);
 	       Connection con=Conn.getInstance();
 	       Statement stmt=con.createStatement(); 
-	       System.out.println("Enter id");
+		   ResultSet rs = stmt.executeQuery("select * from riddlerddata");
+		   System.out.println("----- Table contains Following Data -----");	
+		   while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+				System.out.println("-------------------------------------------");	
+		   System.out.println("Enter id");
 	       int id=s.nextInt();
 	       String sqlQ="delete from riddlerdata where rid="+id+";";
 	       int res=stmt.executeUpdate(sqlQ);
 	       if(res==1) 
 		   {
-	    	   System.out.println("Deleted Question and Answer Successfully");
+	    	   System.out.println(A_GREEN+"Deleted Question and Answer Successfully"+A_RESET);
 	       }
 	       else 
 		   {
-	    	   System.out.println("Opps! Couldn't delete Question and Answer");
+	    	   System.out.println(A_RED+"Opps! Couldn't delete Question and Answer"+A_RESET);
 	       }
 	 	}
 	 	catch(Exception e) 
@@ -199,17 +259,28 @@ public class Admin
 		   Scanner s=new Scanner(System.in);
 	       Connection con=Conn.getInstance();
 	       Statement stmt=con.createStatement(); 
+		   ResultSet rs = stmt.executeQuery("select * from hangmandata");
+		   System.out.println("----- Table contains Following Data -----");	
+		   while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+				System.out.println("-------------------------------------------");
 	       System.out.println("Enter id");
 	       int id=s.nextInt();
 	       String sqlQ="delete from hangmandata where hid="+id+";";
 	       int res=stmt.executeUpdate(sqlQ);
 	       if(res==1) 
 		   {
-	    	   System.out.println("Deleted Question and Answer Successfully");
+	    	   System.out.println(A_GREEN+"Deleted Question and Answer Successfully"+A_RESET);
 	       }
 	       else 
 		   {
-	    	   System.out.println("Opps! Couldn't delete Question and Answer");
+	    	   System.out.println(A_RED+"Opps! Couldn't delete Question and Answer"+A_RESET);
 	       }
 	 	}
 	 	catch(Exception e) 
@@ -217,29 +288,46 @@ public class Admin
 		 System.out.println(e);
 	 	}
 	}
-	private static void RemoveUser() 
-	{
-		try
-		{  
-		   Scanner s=new Scanner(System.in);
-	       Connection con=Conn.getInstance();
-	       Statement stmt=con.createStatement(); 
-	       System.out.println("Enter User id");
-	       int id=s.nextInt();
-	       String sqlQ="delete from user where uid="+id+";";
-	       int res=stmt.executeUpdate(sqlQ);
-	       if(res==1) 
-		   {
-	    	   System.out.println("Deleted User Successfully");
-	       }
-	       else 
-		   {
-	    	   System.out.println("Opps! Couldn't delete user");
-	       }
-	 	}
-	 	catch(Exception e) 
-		{
-		 System.out.println(e);
-	 	}
+	private static void RemoveUser() {
+		try{  
+			   Scanner s=new Scanner(System.in);
+			   Connection con=Conn.getInstance();
+			   Statement stmt=con.createStatement(); 
+			   ResultSet rs = stmt.executeQuery("select * from user");
+		   	   System.out.println("----- Table contains Following Data -----");	
+		       while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	            	    System.out.print(A_GREEN+rs.getObject(i)+" - "+A_RESET);
+	                }
+	                System.out.println("");
+	            }
+				System.out.println("-------------------------------------------");
+	         
+			   System.out.println("Enter User id");
+			   int id=s.nextInt();
+			   String sql1="delete from hangman where User_uid="+id+";";
+			   stmt.executeUpdate(sql1);
+			   String sql2="delete from jwords where User_uid="+id+";";
+			   stmt.executeUpdate(sql2);
+			   String sql3="delete from riddler where User_uid="+id+";";
+			   stmt.executeUpdate(sql3);
+			   String sql4="delete from user_logs where UID_id="+id+";";
+			   stmt.executeUpdate(sql4);
+			   String sqlQ="delete from user where uid="+id+";";
+			   int res=stmt.executeUpdate(sqlQ);
+			   if(res==1) 
+			   {
+				   System.out.println(A_GREEN+"Deleted User Successfully"+A_RESET);
+			   }
+			   else 
+			   {
+				   System.out.println(A_RED+"Opps! Couldn't delete user"+A_RESET);
+			   }
+		 }
+		 catch(Exception e) {
+			 System.out.println(e);
+		 }
 	}
 }
