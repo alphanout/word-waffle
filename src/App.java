@@ -1,4 +1,4 @@
-package src;
+
 import java.util.*;
 public class App {
     public static void main(String[] args) throws Exception {
@@ -10,7 +10,7 @@ public class App {
         String username;
         Scanner sc= new Scanner(System.in);
         System.out.println("WELCOME TO WORD-WAFFLE GAME");
-        System.out.println("Enter 1 for New USER \n Enter 2 for Registered USER");
+        System.out.println("Enter 1 for New USER \nEnter 2 for Registered USER");
         int choice = sc.nextInt();
         switch(choice)
         {

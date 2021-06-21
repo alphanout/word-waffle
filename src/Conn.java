@@ -1,4 +1,4 @@
-package src;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +14,7 @@ public class Conn {
     public static Connection getInstance() {
         try {
             if (conn == null)
-                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/word_waffle","root","Priya@1508");
+                conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/word_waffle","admin","root");
 
         } catch (SQLException ex) {
             System.out.println("SQLException: " + ex.getMessage());

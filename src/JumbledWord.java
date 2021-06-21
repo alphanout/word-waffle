@@ -1,4 +1,4 @@
-package src;
+
 import java.util.*;
 import java.sql.*;
 public class JumbledWord {
@@ -57,7 +57,6 @@ public class JumbledWord {
             System.out.println(A_RED+"GAME OVER"+A_RESET);
             System.out.println(A_GREEN+"YOUR TOTAL SCORE IS : "+totalScore+A_RESET);
         
-            c.close();  
             }
             catch(Exception e){ System.out.println(e);
             }

@@ -1,4 +1,3 @@
-package src;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -113,7 +112,7 @@ public class Hangman {
                 {
                     if(temp.getInt(2)<score) 
                     {
-		                String sql2="update hangman set Tscore="+score+", HangmanData_HID = hangmanData_HID + "+played_till+" where user_uid="+id+";";
+		                String sql2="update hangman set Tscore = "+score+", HangmanData_HID = hangmanData_HID + "+played_till+" where user_uid="+id+";";
 		                st.executeUpdate(sql2);
 	                }
 	                else

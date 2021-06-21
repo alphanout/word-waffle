@@ -1,5 +1,3 @@
-
-package src;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -86,8 +84,7 @@ public class RiddleG {
 	   else {
 	   String sql1="insert into riddler values("+id+","+score+","+c+");";
 	   stmt.executeUpdate(sql1);
-	   }
-       con.close();  
+	   }  
        }
        catch(Exception e){ System.out.println(e);}
 	    

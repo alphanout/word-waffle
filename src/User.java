@@ -1,10 +1,9 @@
-package src;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
-public class User {
+public class User 
+{
     int uid;
     String uname;
     int res;
@@ -12,25 +11,30 @@ public class User {
     {
     	if(uid==0) {
     		System.out.println("Enter your choice:");
-    		while(true) {
+    		while(true) 
+            {
     			System.out.println("1 - Perform Operations ");
     			System.out.println("2 - Play game");
+                System.out.println("3 - LOGOUT");
     			int ch=sc.nextInt();
     			switch(ch) {
     			case 1:
-    				Admin a=new Admin();
+    				new Admin();
     				break;
     			case 2:
     				gameSelection(0,sc);
     				break;
+                case 3:
+                    App a = new App();
+                    a.userRegister();
     			default:
     				System.out.println("Enter correct choice");
     				break;
-    			}
-    			
+    			}	
     		}
     	}
-    	else {
+    	else 
+        {
         gameSelection(uid,sc);
     	}
     }
@@ -38,22 +42,24 @@ public class User {
     {
         this.uid=uid;
         this.uname=uname;
-        
-        try {
-        	Class.forName("com.mysql.cj.jdbc.Driver");  
-            Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3306/word_waffle","root","Priya@1508");  
+        try 
+        {
+        	Connection con = Conn.getInstance();
             Statement stmt=con.createStatement(); 
             String sql1="insert into user values("+uid+",'"+uname+"')";
-             res=stmt.executeUpdate(sql1);
+            res=stmt.executeUpdate(sql1);
         }
-        catch(Exception e) {
+        catch(Exception e) 
+        {
         	System.out.println(e);
         }
-        if(res==1) {
-        System.out.println("User Successfully Registered");
-        gameSelection(uid, sc);
+        if(res==1) 
+        {
+            System.out.println("User Successfully Registered");
+            gameSelection(uid, sc);
         }
-        else {
+        else 
+        {
         	System.out.println("Duplicate id");
         	App a=new App();
         	a.userRegister();
@@ -68,6 +74,7 @@ public class User {
             System.out.println("2 - Riddler");
             System.out.println("3 - Hangman");
             System.out.println("4 - View History");
+            System.out.println("5 - LOGOUT");
             System.out.println("Enter your choice or Enter 0 to exit");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -83,8 +90,11 @@ public class User {
                 new Hangman(sc,uid);
                 break;
                 case 4:
-                	getHistory(uid);
-                	break;
+                getHistory(uid);
+                break;
+                case 5:
+                App a = new App();
+                a.userRegister();
                 case 0:
                 System.exit(0);
                 default:
@@ -93,23 +103,35 @@ public class User {
             }
         }
     }
-    private static void getHistory(int uid){
-    	try {
+    private static void getHistory(int uid)
+    {
+    	try 
+        {
     		Connection con=Conn.getInstance();
- 	       Statement stmt=con.createStatement();
- 	       String sqli="Select * from user_logs where UID_id="+uid+";";
- 	       ResultSet rs=stmt.executeQuery(sqli);
- 	      while(rs.next()) {
-	    	   for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
-	               System.out.print(" "+ rs.getObject(i));
-	             }
-	             System.out.println("");
-	       }
+ 	        Statement stmt=con.createStatement();
+ 	        String sqli="Select * from user_logs where U_id="+uid+";";
+ 	        ResultSet rs=stmt.executeQuery(sqli);
+            if(rs.next())
+            {
+                System.out.println("U_ID --- Score --- Date/Time --- Game Name ");  
+                while(rs.next()) 
+                {
+	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                    {
+	                System.out.print(rs.getObject(i)+" --- ");
+	                }
+	                System.out.println("");
+	            }
+            }
+            else
+            {
+                System.out.println("No History Available!! Play some games first.");
+            }
     	}
-    	catch(Exception e) {
+    	catch(Exception e) 
+        {
     		System.out.println(e);
     	}
-    }
-     
+    }     
 }
 
