@@ -1,6 +1,7 @@
 package src;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.*;
 public class User {
@@ -66,6 +67,7 @@ public class User {
             System.out.println("1 - Jumbled Words");
             System.out.println("2 - Riddler");
             System.out.println("3 - Hangman");
+            System.out.println("4 - View History");
             System.out.println("Enter your choice or Enter 0 to exit");
             int choice = sc.nextInt();
             sc.nextLine();
@@ -80,6 +82,9 @@ public class User {
                 case 3:
                 new Hangman(sc,uid);
                 break;
+                case 4:
+                	getHistory(uid);
+                	break;
                 case 0:
                 System.exit(0);
                 default:
@@ -88,9 +93,23 @@ public class User {
             }
         }
     }
-    private void getHistory()
-    {
-        
-    }   
+    private static void getHistory(int uid){
+    	try {
+    		Connection con=Conn.getInstance();
+ 	       Statement stmt=con.createStatement();
+ 	       String sqli="Select * from user_logs where UID_id="+uid+";";
+ 	       ResultSet rs=stmt.executeQuery(sqli);
+ 	      while(rs.next()) {
+	    	   for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) {
+	               System.out.print(" "+ rs.getObject(i));
+	             }
+	             System.out.println("");
+	       }
+    	}
+    	catch(Exception e) {
+    		System.out.println(e);
+    	}
+    }
+     
 }
 
