@@ -6,6 +6,9 @@ public class User {
     int uid;
     String uname;
     int res;
+    public static final String A_RED = "\u001B[31m";
+    public static final String A_GREEN = "\u001B[32m";
+    public static final String A_RESET = "\u001B[0m";
     User(int uid, Scanner sc)
     {
     	if(uid==0) {
@@ -23,7 +26,7 @@ public class User {
     				gameSelection(0,sc);
     				break;
     			case 3:
-				System.out.println("Thank you for playing the game");
+				System.out.println(A_GREEN+"Thank you for playing the game"+A_RESET);
     				App z=new App();
     				z.userRegister();
     				break;
@@ -35,7 +38,7 @@ public class User {
     	}
     	else {
         gameSelection(uid,sc);
-        System.out.println("Thank you for playing the game");
+        System.out.println(A_GREEN+"Thank you for playing the game"+A_RESET);
         App az=new App();
         az.userRegister();
     	}
@@ -55,11 +58,11 @@ public class User {
         	System.out.println(e);
         }
         if(res==1) {
-        System.out.println("User Successfully Registered");
+        System.out.println(A_GREEN+"User Successfully Registered"+A_RESET);
         gameSelection(uid, sc);
         }
         else {
-        	System.out.println("Duplicate id");
+        	System.out.println(A_RED+"Duplicate id"+A_RESET);
         	App a=new App();
         	a.userRegister();
         }
@@ -74,14 +77,14 @@ public class User {
             System.out.println("3 - Hangman");
             System.out.println("4 - View History");
             System.out.println("5 - View Leader_Board");
-            System.out.println("6 - Quit");
+            System.out.println("6 - LOGOUT");
             System.out.println("Enter your choice or Enter 0 to exit");
             int choice = sc.nextInt();
             sc.nextLine();
             switch(choice)
             {
                 case 1:
-                new JumbledWord();
+                new JumbledWord(uid);
                 break;
                 case 2:
                 new RiddleG(uid);
@@ -93,13 +96,14 @@ public class User {
                 getHistory(uid);
                 break;
                 case 5:
-                getleaderboard(uid, sc);
+                this.getleaderboard(uid, sc);
                 case 0:
                 System.exit(0);
                 case 6:
-                break;
+                App a = new App();
+                a.userRegister();
                 default:
-                System.out.println("Wrong Input!! Please enter again");
+                System.out.println(A_RED+"Wrong Input!! Please enter again"+A_RESET);
                 break;
             }
             if(choice==5)
@@ -112,24 +116,25 @@ public class User {
     		try 
             {
         		Connection con=Conn.getInstance();
-     	        Statement stmt=con.createStatement();
-     	        String sqli="Select * from user_logs where UID_id="+uid+";";
+     	        Statement stmt=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+     	        String sqli="Select * from user_logs where U_id="+uid+";";
      	        ResultSet rs=stmt.executeQuery(sqli);
                 if(rs.next())
                 {
-                    System.out.println("U_ID ------ Total-Score --- Date/Time --- Game Name ");  
-                    while(rs.next()) 
-                    {
-    	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                        rs.previous();
+                        System.out.println("U_ID --- Total-Score --- Date/Time --- Game Name ");  
+                        while(rs.next())
                         {
-    	                System.out.print(rs.getObject(i)+" --- ");
+                        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
+                        {
+    	                System.out.print(A_GREEN+rs.getObject(i)+" --- ");
     	                }
-    	                System.out.println("");
-    	            }
+    	                System.out.println(""+A_RESET);
+                        }
                 }
                 else
                 {
-                    System.out.println("No History Available!! Play some games first.");
+                    System.out.println(A_RED+"No History Available!! Play some games first."+A_RESET);
                 }
         	}
         	catch(Exception e) 
@@ -137,12 +142,12 @@ public class User {
         		System.out.println(e);
         	}
     }
-    private static void getleaderboard(int uid, Scanner sc)
+    private void getleaderboard(int uid, Scanner sc)
     {
         try 
             {
         		Connection con=Conn.getInstance();
-     	        Statement stmt=con.createStatement();
+     	        Statement stmt=con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
                 System.out.println("Enter 1 for Jumbled_Words");
                 System.out.println("Enter 2 for Riddler");
                 System.out.println("Enter 3 for Hangman");
@@ -168,20 +173,22 @@ public class User {
                     {
     	    	        for (int i = 1; i < rs.getMetaData().getColumnCount() + 1; i++) 
                         {
-    	                System.out.print(rs.getObject(i)+" --- ");
+    	                System.out.print(A_GREEN+rs.getObject(i)+" --- ");
     	                }
-    	                System.out.println("");
+    	                System.out.println(""+A_RESET);
     	            }
                 }
                 else
                 {
-                    System.out.println("LeaderBoard Unavailable, Try later !");
+                    System.out.println(A_RED+"LeaderBoard Unavailable, Try later !"+A_RESET);
                 }
         	}
+
         	catch(Exception e) 
             {
         		System.out.println(e);
         	}
+            gameSelection(uid, sc);
     }
      
 }
